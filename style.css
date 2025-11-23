@@ -1,0 +1,670 @@
+/* GLOBAL COLOR VARIABLES */
+:root {
+    --bg: #030b12;
+    --panel-bg: #06131e;
+    --panel-bg-alt: linear-gradient(180deg, #071726, #081424);
+    --line-dark: #0b1c2c;
+    --border: rgba(255,255,255,0.04);
+
+    --text: #e6eef1;
+    --muted: #8aa2b2;
+
+    --accent: #4ec8ff;
+    --accent-soft: #2ea0d4;
+    --danger: #ff5370;
+    --success: #17d47b;
+}
+
+/* BASE LAYOUT */
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+}
+
+.app {
+    max-width: 1120px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* HEADER */
+.header {
+    margin-bottom: 22px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-dark);
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.nav a.btn {
+    text-decoration: none;
+    background: var(--accent);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #000814;
+}
+
+.nav a.btn:hover {
+    background: var(--accent-soft);
+}
+
+.nav {
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+/* PANELS */
+.panel {
+    background: var(--panel-bg);
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+.scene {
+    background: var(--panel-bg-alt);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* BUTTONS */
+.btn {
+    background: var(--accent);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #000814;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: var(--accent-soft);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+/* TYPEWRITER EFFECT DURING INTERROGATION */
+.typewriter {
+    border-right: 2px solid var(--accent);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* GRID & FLEX HELPERS */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    display:flex;
+    flex-direction:column;
+}
+
+.flex-1 {
+    flex:1;
+}
+
+.items-center {
+    align-items:center;
+}
+
+.justify-between {
+    justify-content:space-between;
+}
+
+.flex-gap-8 { gap:8px; }
+.flex-gap-10 { gap:10px; }
+.flex-gap-12 { gap:12px; }
+.flex-gap-14 { gap:14px; }
+.flex-gap-16 { gap:16px; }
+.flex-gap-18 { gap:18px; }
+
+/* Width helpers */
+.w-180 { width:180px; }
+.w-260 { width:260px; }
+.w-320 { width:320px; }
+
+/* Margin helpers */
+.mt-8 { margin-top:8px; }
+.mt-10 { margin-top:10px; }
+.mt-12 { margin-top:12px; }
+.mt-14 { margin-top:14px; }
+.mb-8 { margin-bottom:8px; }
+
+/* Text */
+.text-muted { color:var(--muted); }
+.text-accent { color:var(--accent); }
+.text-danger { color:var(--danger); }
+.text-right { text-align:right; }
+
+/* PORTRAITS / PLACEHOLDER ART */
+.suspect-portrait,
+.portrait-box,
+.fingerprint-print {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(180deg, #051117, #081221);
+    border-radius: 8px;
+    color: var(--muted);
+}
+
+.suspect-portrait { height: 84px; }
+
+.portrait-box { height: 140px; }
+
+.fingerprint-print {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 240px;
+    padding: 16px;
+    background: linear-gradient(180deg, #051117, #081221);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.fingerprint-print img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}
+
+/* SUSPECT GRID */
+.suspects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+/* EVIDENCE BAG */
+.evidence-bag-container {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.evidence-bag {
+  background: var(--panel-bg-alt);
+  border: 1px solid var(--border);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(78, 200, 255, 0.08);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.evidence-bag:hover {
+  background: rgba(78, 200, 255, 0.08);
+  box-shadow: 0 0 10px rgba(78, 200, 255, 0.25);
+}
+
+/* Dropdown panel */
+.evidence-items {
+  display: none;
+  margin-top: 10px;
+  background: var(--panel-bg);
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 10px rgba(0,0,0,0.45);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Show on hover */
+.evidence-bag-container:hover .evidence-items {
+  display: block;
+  opacity: 1;
+}
+
+/* Evidence items */
+.evidence-item {
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.evidence-item:last-child {
+  border-bottom: none;
+}
+
+.evidence-item div:first-child {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.evidence-item .text-muted {
+  color: var(--muted);
+  font-size: 0.85em;
+}
+
+/* When empty */
+.evidence-empty {
+  color: var(--muted);
+  text-align: center;
+  padding: 16px 0;
+}
+
+/* CRIME SCENE CLUES */
+.clue-desc {
+    color: var(--muted);
+}
+
+.flex-clues { display:flex; gap:14px; }
+
+/* INTERROGATION */
+.inter-line {
+    margin: 10px 0;
+}
+
+.feedback-line {
+    margin: 8px 0;
+    color: var(--accent);
+}
+
+.score-line {
+    margin-top: 10px;
+}
+
+/* TABLES / LEADERBOARD */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.table th {
+    background: #0c1a27;
+    color: var(--accent);
+    padding: 8px;
+    text-align: center;
+}
+
+.table td {
+    padding: 8px;
+    border-bottom: 1px solid var(--line-dark);
+}
+
+.table th, .table td {
+    text-align: center !important;
+}
+
+.table td:first-child,
+.table th:first-child {
+    width: 10%;
+}
+
+.rank-1 { color: gold; }
+.rank-2 { color: silver; }
+.rank-3 { color: #cd7f32; }
+
+.lb-empty {
+    text-align: center;
+    padding: 14px 0;
+    color: var(--muted);
+}
+
+/* FORMS */
+.form-row { display:flex; gap:8px; }
+.form-col { display:flex; flex-direction:column; gap:8px; }
+
+.input-field {
+    padding:8px;
+    width:100%;
+    border-radius:6px;
+    background:#071018;
+    border:1px solid rgba(255,255,255,0.04);
+    color:#e6eef1;
+}
+
+.fp-list {
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+/* RETURN BUTTON WRAP */
+.return-wrap { margin-top:12px;}
+.return-wrap .btn {
+    text-decoration: none;
+}
+
+/* FOOTER NOTE */
+.footer-note {
+    text-align:right;
+    color:var(--muted);
+    margin-top:14px;
+}
+
+/* Hero container */
+.hero {
+    position: relative;
+    height: 420px;
+    margin-bottom: 26px;
+    background: radial-gradient(circle at center, #0c1c28 0%, #071018 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Bloody glowing title with typewriter animation */
+.crime-title {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 800;
+    color: #ff1e1e;
+    letter-spacing: 3px;
+    line-height: 1.1;
+    font-family: "Impact", "Staatliches", sans-serif;
+}
+
+.crime-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid rgba(255,0,0,0.7);
+    animation:
+        typing 4s steps(27) forwards,
+        cursorBlink 0.7s step-end infinite;
+}
+
+/* Typing animation ends exactly where the text ends */
+@keyframes typing {
+    from { width: 0ch; }
+    to { width: 27ch; }
+}
+
+/* Cursor blinks forever when typing stops */
+@keyframes cursorBlink {
+    0% { border-color: rgba(255,0,0,0.7); }
+    50% { border-color: transparent; }
+    100% { border-color: rgba(255,0,0,0.7); }
+}
+
+/* Blood drips under title — appear AFTER typing completes */
+.crime-title .drip {
+    position: absolute;
+    top: 100%;
+    width: 6px;
+    height: 20px;
+    background: #ff1e1e;
+    border-radius: 3px;
+    opacity: 0;
+    animation:
+        dripFadeIn 0.1s ease forwards,
+        dripFall 2.2s ease-in infinite;
+    filter: drop-shadow(0 0 6px #a80000);
+}
+
+/* Drip falling animation */
+@keyframes dripFall {
+    0% { transform: translateY(0) scaleY(1); opacity: 1; }
+    100% { transform: translateY(40px) scaleY(2.2); opacity: 0; }
+}
+
+/* Drips begin ONLY after typing animation finishes (8s) */
+.drip:nth-child(2) { left: 45%; height: 18px; animation-delay: 4.15s, 4.25s; }
+.drip:nth-child(5) { left: 57%; height: 26px; animation-delay: 4.55s, 4.65s; }
+.drip:nth-child(3) { left: 53%; height: 22px; animation-delay: 4.95s, 5.05s; }
+.drip:nth-child(6) { left: 42%; height: 20px; animation-delay: 5.35s, 5.45s; }
+.drip:nth-child(4) { left: 48%; height: 16px; animation-delay: 5.75s, 5.85s; }
+
+/* Fade in AFTER typing animation (4.5s) */
+@keyframes dripFadeIn {
+    from { opacity: 0; }
+    to { opacity: 0.9; }
+}
+
+/* Table + chairs */
+.interrogation-scene {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 80px;
+}
+
+/* Table */
+.inter-table {
+    width: 260px;
+    height: 20px;
+    background: #6e4f29;
+    border-radius: 3px;
+    position: relative;
+    box-shadow: 0 3px 0 #4b351e;
+}
+
+.inter-table::before,
+.inter-table::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 90px;
+    background: #5a3f24;
+    bottom: -90px;
+}
+
+.inter-table::before { left: 18px; }
+.inter-table::after { right: 18px; }
+
+/* Chairs */
+.chair {
+    width: 30px;
+    height: 110px;
+    background: #8b6234;
+    border-radius: 6px 6px 3px 3px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+}
+
+.chair::before,
+.chair::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 80px;
+    background: #6c4a28;
+    bottom: -80px;
+    border-radius: 2px;
+}
+
+.chair::before { left: 6px; }
+.chair::after { right: 6px; }
+
+.portrait-box, .suspect-portrait {
+    width: 160px;
+    height: 200px;
+    background: linear-gradient(180deg, #14222f, #0b1622);
+    border-radius: 8px;
+    border: 1px solid #333;
+    color: #8899a6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+.suspect-portrait img, .portrait-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.center-row {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+/* CRIME SCENE IMAGE + CLUES     */
+.scene {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 100%;
+}
+
+.scene-bg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.scene-wrapper {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.scene-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Base clue marker (positioned absolutely by PHP) */
+.scene-clue {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+}
+
+/* Easy mode: show glow box + button */
+.difficulty-1 .scene-clue {
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    background: rgba(78, 200, 255, 0.2);
+}
+
+/* Medium mode: clue visibly clickable */
+.difficulty-2 .scene-clue {
+    border-radius: 4px;
+    background: rgba(255,255,255,0.15);
+    cursor: pointer;
+}
+
+/* Hard mode: clues invisible until hovered */
+.difficulty-3 .scene-clue {
+    opacity: 0;
+    cursor: pointer;
+}
+
+.difficulty-3 .scene-clue:hover {
+    opacity: 1;
+}
+
+/* Small collect button for easy mode */
+.btn-small {
+    background: var(--accent);
+    color: #000814;
+    padding: 4px 6px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btn-small:hover {
+    background: var(--accent-soft);
+}
+
+/* FAR LEFT TOP SHELF */
+.pos-top-left { top: 22%; left: 7%; }
+
+/* GREEN WORKBENCH AREA (center-left) */
+.pos-workbench { top: 57%; left: 30%; }
+
+/* BROWN FLOORBOARD / PALLET IN FRONT OF WORKBENCH */
+.pos-floorboard { top: 78%; left: 48%; }
+
+/* TOP RIGHT CORNER SHELVING */
+.pos-corner-right { top: 24%; left: 88%; }
+
+/* CENTER AISLE BETWEEN SHELVES */
+.pos-middle { top: 55%; left: 50%; transform: translate(-50%, -50%); }
+
+/* RED PALLET JACK / TOOL AREA (bottom-left) */
+.pos-toolbox { top: 80%; left: 20%; }
+
+/* DARK SHADOWS BETWEEN THE RACKS (center-right) */
+.pos-shadows { top: 42%; left: 63%; }
+
+/* DOORWAY / WHITE ROLL-UP SHUTTER ON RIGHT SIDE */
+.pos-doorway { top: 35%; left: 78%; }
+
+
+/* Clue icons on the scene */
+.clue-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+/* Hotspot container */
+.clue {
+    position: absolute;
+}
+
+/* Easy – button visible */
+.difficulty-1 .clue {
+    opacity: 1;
+}
+
+/* Medium – clickable images */
+.difficulty-2 .clue {
+    cursor: pointer;
+}
+
+/* Hard – invisible until hovered */
+.difficulty-3 .clue {
+    opacity: 0;
+    cursor: pointer;
+}
+
+.difficulty-3 .clue:hover {
+    opacity: 1;
+}
+
+.clue-btn {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.clue-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
